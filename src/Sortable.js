@@ -234,19 +234,19 @@ let dragEl,
 			const thresholdRect = sortable[expando].options.emptyInsertThresholdRect;
 			if ((!threshold && !thresholdRect) || lastChild(sortable)) return;
 
-			if (threshold) {
-				const rect = getRect(sortable),
-					insideHorizontally = x >= (rect.left - threshold) && x <= (rect.right + threshold),
-					insideVertically = y >= (rect.top - threshold) && y <= (rect.bottom + threshold);
-	
-				if (insideHorizontally && insideVertically) {
-					return (ret = sortable);
-				}
-			} else if (thresholdRect) {
+			if (thresholdRect) {
 				const rect = getRect(sortable),
 					insideHorizontally = x >= (rect.left - thresholdRect.left) && x <= (rect.right + thresholdRect.right),
 					insideVertically = y >= (rect.top - thresholdRect.top) && y <= (rect.bottom + thresholdRect.bottom);
 
+				if (insideHorizontally && insideVertically) {
+					return (ret = sortable);
+				}
+			} else if (threshold) {
+				const rect = getRect(sortable),
+					insideHorizontally = x >= (rect.left - threshold) && x <= (rect.right + threshold),
+					insideVertically = y >= (rect.top - threshold) && y <= (rect.bottom + threshold);
+	
 				if (insideHorizontally && insideVertically) {
 					return (ret = sortable);
 				}

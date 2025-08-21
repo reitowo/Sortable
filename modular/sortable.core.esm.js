@@ -958,17 +958,17 @@ var documentExists = typeof document !== 'undefined',
       var threshold = sortable[expando].options.emptyInsertThreshold;
       var thresholdRect = sortable[expando].options.emptyInsertThresholdRect;
       if (!threshold && !thresholdRect || lastChild(sortable)) return;
-      if (threshold) {
+      if (thresholdRect) {
         var rect = getRect(sortable),
-          insideHorizontally = x >= rect.left - threshold && x <= rect.right + threshold,
-          insideVertically = y >= rect.top - threshold && y <= rect.bottom + threshold;
+          insideHorizontally = x >= rect.left - thresholdRect.left && x <= rect.right + thresholdRect.right,
+          insideVertically = y >= rect.top - thresholdRect.top && y <= rect.bottom + thresholdRect.bottom;
         if (insideHorizontally && insideVertically) {
           return ret = sortable;
         }
-      } else if (thresholdRect) {
+      } else if (threshold) {
         var _rect = getRect(sortable),
-          _insideHorizontally = x >= _rect.left - thresholdRect.left && x <= _rect.right + thresholdRect.right,
-          _insideVertically = y >= _rect.top - thresholdRect.top && y <= _rect.bottom + thresholdRect.bottom;
+          _insideHorizontally = x >= _rect.left - threshold && x <= _rect.right + threshold,
+          _insideVertically = y >= _rect.top - threshold && y <= _rect.bottom + threshold;
         if (_insideHorizontally && _insideVertically) {
           return ret = sortable;
         }
